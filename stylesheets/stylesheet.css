@@ -51,7 +51,7 @@ Theme Styles
 body {
   box-sizing: border-box;
   color:#373737;
-  background: #212121;
+  background: #000000;
   font-size: 16px;
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -301,14 +301,14 @@ Full-Width Styles
 
 #project_title {
   margin: 0;
-  color: #fff;
+  color: ##00ff38;
   font-size: 42px;
   font-weight: 700;
   text-shadow: #111 0px 0px 10px;
 }
 
 #project_tagline {
-  color: #fff;
+  color: ##00ff38;
   font-size: 24px;
   font-weight: 300;
   background: none;
