@@ -5,7 +5,7 @@
 <head>
 
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-	<title>Home
+	<title>GEOG 771 Home
 	</title>
 
 	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js">
@@ -141,6 +141,9 @@ L.geoJson([Hagley],	{
 	fillColor: 'red',
 	fillOpacity: 0.3
 }).addTo(mymap).bindPopup("Hagley Park, Christchurch");
+
+L.marker([-43.5285, 172.6234]).addTo(mymap)
+			.bindPopup("<b>Hagley Park, Christchurch</b>").openPopup();
 
 </script> 
 
