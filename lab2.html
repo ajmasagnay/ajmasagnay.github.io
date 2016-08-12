@@ -6,12 +6,9 @@
 
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 	<title>GEOG 771 Lab 2
-	</title>
+		</title>
 
-	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js">
-	</script>
-
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+	<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 
 </head>
 
@@ -51,8 +48,7 @@
 			<br>
 				<span style="font-family: Segoe UI Emoji;">Hi,
 				my name is Aaron. I'm in GEOG 771 at the University of Auckland. This
-				website will hold my labs and project for this class. For example, the
-				map of Hagley Park in Christchurch below.</span>
+				website will hold my labs and project for this class. For example, here is the result of Lab 2. This webmap was created with Carto. The map is displaying Seattle cycle crash data from 2006 to 2016, obtained from the Seattle Department of Transportation.</span>
 			<br>
 			<br>
 			</td>
@@ -67,85 +63,16 @@
 			<div id="mapid" style="width: 100%; height: 500px;" align="center">
 				</div>
 
-<script>
+			<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 
-var mymap = L.map('mapid').setView([-43.5285, 172.6234], 14);
-L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(mymap);
+			<script>
 
-</script>
+				window.onload = function()	{
+					cartodb.createVis('mapid', 'https://ajmasagnay.carto.com/api/v2/viz/caf3e706-5dd1-11e6-b646-0e8c56e2ffdb/viz.json')
+				}
 
-<script>
+			</script>
 
-var Hagley = { 
-	"type": "Feature",
-	"properties": {
-		"name": "name"
-		}, "geometry": {
-			"type": "Polygon",
-			"coordinates": [
-			[
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				],
-				[
-				172.6123338354679,
-				-43.54023778283648,
-				0
-				],
-				[
-				172.6180752871326,
-				-43.54022034262606,
-				0
-				],
-				[
-				172.6279659433745,
-				-43.53455773090603,
-				0
-				],
-				[
-				172.6285941224909,
-				-43.52537950852417,
-				0
-				],
-				[
-				172.6253616656776,
-				-43.52059908846449,
-				0
-				],
-				[
-				172.6226839691339,
-				-43.52209659983998,
-				0
-				],
-				[
-				172.6186457310187,
-				-43.52223562045263,
-				0
-				],
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				]
-			]	
-		]
-	}
-};
-
-L.geoJson([Hagley],	{
-	color: 'black',
-	fillColor: 'red',
-	fillOpacity: 0.3
-}).addTo(mymap).bindPopup("Hagley Park, Christchurch");
-
-L.marker([-43.5285, 172.6234]).addTo(mymap)
-			.bindPopup("<b>Hagley Park, Christchurch</b>").openPopup();
-
-</script> 
 
 			</td>
 		</tr>
