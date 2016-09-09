@@ -1,0 +1,267 @@
+<html>
+
+<head>
+
+    <meta charset=utf-8/>
+    <title>Map Two</title>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css' rel='stylesheet' />
+
+</head>
+
+<body>
+
+	<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+	</style>
+
+    <div id="map2" style="width: 100%; height: 100%;">
+        </div>
+
+    <script>
+
+            mapboxgl.accessToken = "pk.eyJ1IjoiYWptYXNhZ25heSIsImEiOiJjaXJ2ODhxNzYwajFyZmdtOGhnZ2YxbTNrIn0.r6qWjMuLW7YLc5bAmz8HHw";
+
+            var map2 = new mapboxgl.Map({
+                container: 'map2',
+                style: "mapbox://styles/ajmasagnay/cis85mucr000e2xod1t2t9sw2",
+                center: [174.060812, -41.483030],
+                zoom: 4.7
+            });
+
+            map2.on('load', function () {
+                map2.addSource('tracks', {
+                    type: 'vector',
+                    url: "mapbox://ajmasagnay.3nlmm3lc"
+                });
+			
+			map2.addLayer({
+				'id': 'tracks',
+				'type': 'line',
+				'source': 'tracks',
+				'source-layer': "greatwalks-3qaji9",
+				'layout': {
+					'visibility': 'visible',
+					'line-join': 'round',
+					'line-cap': 'round'
+				},
+				'paint': {
+					'line-color': '#ff6f00',
+					'line-width': 2
+				  }
+			  });
+			});
+                
+			map2.on('load', function () {
+				map2.addSource("points", {
+					"type": "geojson",
+					"data": {
+						"type": "FeatureCollection",
+						"features": [
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  175.1165771484375,
+											  -39.572880798549505
+											]
+							},
+							"properties": {
+								"title": "Whanganui River",
+								"icon": "",
+								"description": "<strong>Length: 145 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  175.59722900390622,
+											  -39.21842321714146
+											]
+							},
+							"properties": {
+								"title": "Round The Mountain Track",
+								"icon": "",
+								"description": "<strong>Length: 43 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  177.0615005493164,
+											  -38.702659307238
+											]
+							},
+							"properties": {
+								"title": "Lake Waikaremoana Great Walk",
+								"icon": "",
+								"description": "<strong>Length: 46 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  173.05526733398435,
+											  -40.87354540775492
+											]
+							},
+							"properties": {
+								"title": "Abel Tasman Coast Track",
+								"icon": "",
+								"description": "<strong>Length: 60 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+												172.1289825439453,
+											  -40.947750930283476					  
+											]
+							},
+							"properties": {
+								"title": "Heaphy Track",
+								"icon": "",
+								"description": "<strong>Length: 78 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  168.18557739257812,
+											  -44.76721188410697
+											]
+							},
+							"properties": {
+								"title": "Routeburn Track",
+								"icon": "",
+								"description": "<strong>Length: 32 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  167.74269104003906,
+											  -44.788657917188104
+											]
+							},
+							"properties": {
+								"title": "Milford Track",
+								"icon": "",
+								"description": "<strong>Length: 53 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  167.61703491210938,
+											  -45.44086267178175
+											]
+							},
+							"properties": {
+								"title": "Kepler Track",
+								"icon": "",
+								"description": "<strong>Length: 60 km</strong>"
+							}
+						},
+						{
+							"type": "Feature",
+							"geometry": {
+								"type": "Point",
+								"coordinates": [
+											  168.06610107421872,
+											  -46.87450931652862
+											]
+							},
+							"properties": {
+								"title": "Rakiura Track",
+								"icon": "",
+								"description": "<strong>Length: 32 km</strong>"
+							}
+						},
+						]
+					}
+			});
+
+			map2.addLayer({
+				"id": "points",
+				"type": "symbol",
+				"source": "points",
+				"layout": {
+					"icon-image": "star-15",
+					"text-field": "{title}",
+					"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+					"text-size": 10,
+					"text-offset": [0, 0.6],
+					"text-anchor": "top"
+				}
+				});
+			});
+				
+			
+			
+			var popup = new mapboxgl.Popup({
+				closeButton: false,
+				closeOnClick: false
+			});	
+		
+			map2.on('mousemove', function(e) {
+				var features = map2.queryRenderedFeatures(e.point, {layers: ['points']});
+				map2.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+				if (!features.length) {
+					popup.remove();
+					return;
+					}
+			
+				var feature = features[0];
+			
+				popup.setLngLat(feature.geometry.coordinates)
+					.setHTML(feature.properties.description)
+					.addTo(map2);
+			});
+			
+			map2.on('click', function(e) {
+				var features = map2.queryRenderedFeatures(e.point, {layers: ['points']});
+				map2.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+				if (!features.length) {
+				popup.remove();
+				return;
+				}
+		
+				var feature = features[0];
+		
+				popup.setLngLat(feature.geometry.coordinates)
+					.setHTML(feature.properties.description)
+					.addTo(map2);
+			});
+			
+			map2.on('click', function (e) {
+				var features = map2.queryRenderedFeatures(e.point, { layers: ['points'] });
+				if (features.length) {
+				map2.flyTo({center: features[0].geometry.coordinates, zoom: 8});
+				}
+			});
+     
+    </script>
+
+</body>
+</html>

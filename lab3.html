@@ -15,9 +15,9 @@
 
 </head>
 
-<body style="background-image: url(images/6.jpg);">
+<body style="background-image: url(../Prelab%20exercise/images/6.jpg);">
 
-<table style="font-family: Shruti; background-color: white; width: 75%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="font-family: Shruti; background-color: white; width: 85%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="width: 65%; text-align: center;"><big>
@@ -29,30 +29,31 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="index.html"><span style="font-weight: bold;">Home</span></a></td>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab2.html"><span style="font-weight: bold;">Lab
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="../Prelab exercise/index.html"><span style="font-weight: bold;">Home</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="../Prelab exercise/lab2.html"><span style="font-weight: bold;">Lab
 			2</span></a></td>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab3.html"><span style="font-weight: bold;">Lab
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="../Prelab exercise/lab3.html"><span style="font-weight: bold;">Lab
 			3</span></a></td>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab4.html"><span style="font-weight: bold;">Lab
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="../Prelab exercise/lab4.html"><span style="font-weight: bold;">Lab
 			4</span></a></td>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="project.html"><span style="font-weight: bold;">Project</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="../Prelab exercise/project.html"><span style="font-weight: bold;">Project</span></a></td>
 		</tr>
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="text-align: center;">
 			<br>
-				<span style="font-family: Segoe UI Emoji;">Hi,
-				my name is Aaron. I'm in GEOG 771 at the University of Auckland. This
-				website will hold my labs and project for this class. For example, the
-				map of Hagley Park in Christchurch below.</span>
+				<span style="font-family: Segoe UI Emoji;">
+				Below are two maps showing the nine Great Walks of Aotearoa, New Zealand. Map one (left) was made using Mapbox Studio. 
+				Map two (right) was made using the Mapbox GL JS API and is therefore more interactive. 
+				The stars represent clickable objects which can be used to fly to the Great Walk vector.
+				</span>
 			<br>
 			<br>
 			</td>
@@ -60,95 +61,34 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 75%;">
+<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 85%;">
 	<tbody>
 		<tr>
-			<td style="text-align: center; width: 75%; background-color: white;">
-			<div id="mapid" style="width: 100%; height: 500px;" align="center">
-				</div>
+			<td style="text-align: center; width: 85%; background-color: white;">
+          
+                <table width="50%" border="0" align="left">
+  					<tr>
+    				<td>&nbsp; 
+    				<iframe width="100%" height="750px" frameborder="0" src="mapOne.html">
+    					</iframe>
+    					</td>
+  					</tr>
+					</table>
 
-<script>
-
-var mymap = L.map('mapid').setView([-43.5285, 172.6234], 14);
-L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(mymap);
-
-</script>
-
-<script>
-
-var Hagley = { 
-	"type": "Feature",
-	"properties": {
-		"name": "name"
-		}, "geometry": {
-			"type": "Polygon",
-			"coordinates": [
-			[
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				],
-				[
-				172.6123338354679,
-				-43.54023778283648,
-				0
-				],
-				[
-				172.6180752871326,
-				-43.54022034262606,
-				0
-				],
-				[
-				172.6279659433745,
-				-43.53455773090603,
-				0
-				],
-				[
-				172.6285941224909,
-				-43.52537950852417,
-				0
-				],
-				[
-				172.6253616656776,
-				-43.52059908846449,
-				0
-				],
-				[
-				172.6226839691339,
-				-43.52209659983998,
-				0
-				],
-				[
-				172.6186457310187,
-				-43.52223562045263,
-				0
-				],
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				]
-			]	
-		]
-	}
-};
-
-L.geoJson([Hagley],	{
-	color: 'black',
-	fillColor: 'red',
-	fillOpacity: 0.3
-}).addTo(mymap).bindPopup("Hagley Park, Christchurch");
-
-</script> 
-
-			</td>
+				<table width="50%" border="0" align="right">
+  					<tr>
+    				<td>&nbsp;
+    				<iframe width="100%" height="750px" frameborder="0" src="mapTwo.html">
+    					</iframe>
+    					</td>
+  					</tr>
+					</table>
+           
+            </td>
 		</tr>
 	</tbody>
 </table>
 
 </body>
 
-</html>
+</htm
