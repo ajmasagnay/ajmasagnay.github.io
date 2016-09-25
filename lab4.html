@@ -5,19 +5,48 @@
 <head>
 
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-	<title>GEOG 771 Lab 4
-	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GEOG 771 Lab 4</title>
+	<link rel="stylesheet" href="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+	<script src="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+	<style>
 
-	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js">
-	</script>
+		.info {
+			padding: 10px;
+			font: 14px font, sans-serif;
+			background: white;
+			background: rgba(255,255,255,1);
+			box-shadow: 0 0 20px rgba(0,0,0,0.2);
+			border-radius: 10px;
+		}
 
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+		.info h4 {
+			margin: 0 0 10px;
+			color: #000000;
+		}
+
+		.legend {
+			text-align: left;
+			line-height: 18px;
+			color: #555;
+			font-weight: bold;
+		}
+
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+		}
+	
+	</style>
 
 </head>
 
 <body style="background-image: url(images/6.jpg);">
 
-<table style="font-family: Shruti; background-color: white; width: 75%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="font-family: Shruti; background-color: white; width: 85%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="width: 65%; text-align: center;"><big>
@@ -29,7 +58,7 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="index.html"><span style="font-weight: bold;">Home</span></a></td>
@@ -44,15 +73,12 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="text-align: center;">
 			<br>
-				<span style="font-family: Segoe UI Emoji;">Hi,
-				my name is Aaron. I'm in GEOG 771 at the University of Auckland. This
-				website will hold my labs and project for this class. For example, the
-				map of Hagley Park in Christchurch below.</span>
+				<span style="font-family: Segoe UI Emoji;">In lab 4, we are working with data from the New Zealand Fire Service to produce a hexbin map of structural fires in the Auckland region. The data includes fires from January 2013 to June 30, 2016. Interactivity was added using Leaflet.</span>
 			<br>
 			<br>
 			</td>
@@ -60,89 +86,128 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 75%;">
+<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 85%;">
 	<tbody>
 		<tr>
-			<td style="text-align: center; width: 75%; background-color: white;">
-			<div id="mapid" style="width: 100%; height: 500px;" align="center">
+			<td style="text-align: center; width: 85%; background-color: white;">
+			<div id="map" style="width: 100%; height: 900px">
 				</div>
 
-<script>
+			<script type="text/javascript" src="hexFires2.js">
+				</script>	
 
-var mymap = L.map('mapid').setView([-43.5285, 172.6234], 14);
-L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(mymap);
+			<script>
+				
+				var map = L.map('map').setView([-36.892484305134516, 174.832360900751553], 11);
+				
+				L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+					maxZoom: 18,
+					attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+						'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+						'Imagery © <a href="http://mapbox.com">Mapbox</a>, ' +
+						'Fire Data <a href="http://www.fire.org.nz/">2016 New Zealand Fire Service</a>',
+					id: 'mapbox.streets'
+				}).addTo(map);
+				
+				function getColor(d) {
+					return 	d > 40 ? '#7f2704' :
+							d > 21 ? '#c24001' :
+							d > 11 ? '#ed6410' :
+							d > 6 ? '#fd9243' :
+							d > 3 ? '#fdbc82' :
+							d > 1 ? '#fddfc1' :
+									'#fff5eb';	// body...
+				}
 
-</script>
+				function style(feature) {
+					return {
+						weight: 2,
+						opacity: 1,
+						color: 'white',
+						dashArray: '0',
+						fillOpacity: 0.7,
+						fillColor: getColor(feature.properties.PNTCNT)	
+					};
+				}
 
-<script>
+				var info = L.control();
 
-var Hagley = { 
-	"type": "Feature",
-	"properties": {
-		"name": "name"
-		}, "geometry": {
-			"type": "Polygon",
-			"coordinates": [
-			[
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				],
-				[
-				172.6123338354679,
-				-43.54023778283648,
-				0
-				],
-				[
-				172.6180752871326,
-				-43.54022034262606,
-				0
-				],
-				[
-				172.6279659433745,
-				-43.53455773090603,
-				0
-				],
-				[
-				172.6285941224909,
-				-43.52537950852417,
-				0
-				],
-				[
-				172.6253616656776,
-				-43.52059908846449,
-				0
-				],
-				[
-				172.6226839691339,
-				-43.52209659983998,
-				0
-				],
-				[
-				172.6186457310187,
-				-43.52223562045263,
-				0
-				],
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				]
-			]	
-		]
-	}
-};
+				info.onAdd = function (map) {
+					this._div = L.DomUtil.create('div', 'info');
+					this.update();
+					return this._div;
+				};
 
-L.geoJson([Hagley],	{
-	color: 'black',
-	fillColor: 'red',
-	fillOpacity: 0.3
-}).addTo(mymap).bindPopup("Hagley Park, Christchurch");
+				info.update = function (props) {
+					this._div.innerHTML = '<h4>Number of structural fires reported, <br/>January 2013 to June 2016</h4>' + 
+					(props ? '<b>' + props.PNTCNT + ' fires'
+						:'Hover over a hexbin');
+				};
 
-</script> 
+				info.addTo(map);
+
+				function highlightFeature(e) {
+					var layer = e.target;
+
+					layer.setStyle({
+						weight: 2,
+						color: '#00007f',
+						dashArray: '',
+						fillOpacity: 0.7
+					});
+
+					if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+						layer.bringToFront();
+
+					info.update(layer.feature.properties);
+					}
+				}
+				
+				var geojson;
+
+				function resetHighlight(e) {
+					geojson.resetStyle(e.target);
+					info.update();
+				}
+
+				function onEachFeature(feature, layer) {
+					layer.on({
+						mouseover: highlightFeature,
+						mouseout: resetHighlight,
+					});
+				}
+
+				geojson = L.geoJson(hexFire, {
+					style: style,
+					onEachFeature: onEachFeature
+				}).addTo(map);
+
+				var legend = L.control({position: 'bottomright'});
+
+				legend.onAdd = function (map) {
+
+					var div = L.DomUtil.create('div', 'info legend'),
+						grades = [0, 1, 3, 6, 11, 21, 41],
+						key_labels = ["0", "1-2", "3-5", "6-10", "11-20", "21-40", "> 40"],
+						labels = ["<h4>Legend:<br/>Structural fires<br/>per hexbin</h4>"],
+						from, to;
+
+					for (var i=0; i<grades.length; i++) {
+						from = grades[i];
+						to = grades[i+1];
+
+						labels.push(
+							'<i style="background:' + getColor(from + 1) + ' "></i>' +
+							key_labels[i]);
+					}
+
+					div.innerHTML = labels.join('<br>');
+					return div;
+				};
+
+				legend.addTo(map);
+
+			</script> 
 
 			</td>
 		</tr>
