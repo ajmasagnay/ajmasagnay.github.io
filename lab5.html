@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+
+	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+	<title>Lab 5
+		</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+	<script src="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.js">
+		</script>
+	<style>
+		
+		.info {
+			padding: 10px;
+			font: 14px font, sans-serif;
+			background: white;
+			background: rgba(255,255,255,1);
+			box-shadow: 0 0 20px rgba(0,0,0,0.2);
+			border-radius: 10px;
+		}
+
+		.info h4 {
+			margin: 0 0 10px;
+			color: #000000;
+		}
+
+		.legend {
+			text-align: left;
+			line-height: 18px;
+			color: #555;
+			font-weight: bold;
+		}
+
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+		}
+
+	</style>
+
+</head>
+
+<body style="background-image: url(images/6.jpg);">
+
+<table style="font-family: Shruti; background-color: white; width: 75%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+	<tbody>
+		<tr>
+			<td style="width: 65%; text-align: center;"><big>
+			</big>
+				<h1 style="text-align: center; font-family: Segoe UI Emoji;"><big>GEOG
+				771 - 2016</big></h1>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+	<tbody>
+		<tr>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="index.html"><span style="font-weight: bold;">Home</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab2.html"><span style="font-weight: bold;">Lab
+			2</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab3.html"><span style="font-weight: bold;">Lab
+			3</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab4.html"><span style="font-weight: bold;">Lab
+			4</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab5.html"><span style="font-weight: bold;">Lab 5</span></a></td>
+		</tr>
+	</tbody>
+</table>
+
+<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+	<tbody>
+		<tr>
+			<td style="text-align: center;">
+			<br>
+				<span style="font-family: Segoe UI Emoji;">Hi,
+				my name is Aaron. I'm in GEOG 771 at the University of Auckland. This
+				website will hold my labs and project for this class. For example, the
+				map of Hagley Park in Christchurch below.</span>
+			<br>
+			<br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 75%;">
+	<tbody>
+		<tr>
+			<td style="text-align: center; width: 75%; background-color: white;">
+			<div id="map" style="width: 100%; height: 1000px;" align="center">
+				</div>
+
+			<script type="text/javascript" src="pizKiaTweets.js">
+				</script>
+	
+			<script>
+				
+				var map = L.map('map').setView([-41.274061, 173.296111], 6);
+				
+				var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { 
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' +
+						'Twitter Data <a href="https://twitter.com/mattzook">@mattzook</a> ' + 
+						'<a href="http://www.floatingsheep.org/p/dolly.html">DOLLY</a> ' +
+						'<a href="http://www.floatingsheep.org/">Floating Sheep Collective</a>'
+					}).addTo(map);
+				
+				function getColor(d) {
+					return  d > 1.1 ? '#ff6666':
+					        d > 0.9 ? '#ffcc66':
+					        d > 0.001 ? '#6fcbce':
+					        d > 0     ? '#6fcbce':
+					                'transparent';
+					 }
+				
+				//function getColor not working. Most likely because of the breaks.
+				//getColor was not being called correctly in function (style).
+
+				function style(feature) {
+					return {
+						weight: 1,
+						opacity: 1,
+						color: 'white',
+						dashArray: '0',
+						fillOpacity: 0.7,
+						fillColor: getColor(feature.properties.Piz_Kia_LQ)
+					};
+				}
+				// fillColor: getColor(feature.properties.Piz_Kia_LQ) --- Problem was spelling.
+
+				L.geoJson(tweets, {style: style}).addTo(map); // {style: style} adds the function style, which contains the function getColor.
+
+				var legend = L.control({position: 'bottomright'});
+
+				function getColorA(d) {
+					return	d > 4 ? '#ff6666':
+					        d > 3 ? '#ffcc66':
+					        d > 2 ? '#6fcbce':
+					        d > 1 ? 'transparent':
+					                'transparent';
+				}
+
+				legend.onAdd = function (map) {
+
+					var div = L.DomUtil.create('div', 'info legend'),
+						grades = [1, 2, 3, 4],
+						key_labels = ["No tweets", "More Kia Ora tweets", 
+						"About same Kia Ora Tweets and Pizza tweets", "More Pizza tweets"],
+						labels = ["<h4>Legend</h4>"],
+						from, to;
+
+					for (var i=0; i<grades.length; i++) {
+						from = grades[i];
+						to = grades[i+1];
+
+						labels.push(
+							'<i style="background:' + getColorA(from + 1) + ' "></i>' +
+							key_labels[i]);
+					}
+
+					div.innerHTML = labels.join('<br>');
+					return div;
+				};
+
+				// Legend not working. Will attempt with new getColorA function.
+				// Legend works with new getColorA function.
+
+				legend.addTo(map);
+
+				// var info just to add the title.
+
+				var info = L.control();
+
+				info.onAdd = function (map) {
+					this._div = L.DomUtil.create('div', 'info');
+					this.update();
+					return this._div;
+				};
+
+				info.update = function (props) {
+					this._div.innerHTML = '<h4>Hexbin map of location quotient for<br>"Pizza" tweets and "Kia Ora" tweets</h4>'
+				};
+
+				info.addTo(map);
+
+			</script>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+</body>
+
+</html>
