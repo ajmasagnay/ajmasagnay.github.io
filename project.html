@@ -13,23 +13,26 @@
 
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
 
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 
 <body style="background-image: url(images/6.jpg);">
 
-<table style="font-family: Shruti; background-color: white; width: 75%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="font-family: Shruti; background-color: white; width: 85%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="width: 65%; text-align: center;"><big>
 			</big>
 				<h1 style="text-align: center; font-family: Segoe UI Emoji;"><big>GEOG
-				771 - 2016</big></h1>
+				771 - 2016</big></br><a href="project.html">PROJECT</a></h1>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
 			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="index.html"><span style="font-weight: bold;">Home</span></a></td>
@@ -39,20 +42,17 @@
 			3</span></a></td>
 			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab4.html"><span style="font-weight: bold;">Lab
 			4</span></a></td>
-			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="project.html"><span style="font-weight: bold;">Project</span></a></td>
+			<td style="width: 20%; text-align: center; background-color: white; font-family: Segoe UI Emoji;"><a href="lab5.html"><span style="font-weight: bold;">Lab 5</span></a></td>
 		</tr>
 	</tbody>
 </table>
 
-<table style="background-color: white; width: 75%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+<table style="background-color: white; width: 85%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
 	<tbody>
 		<tr>
-			<td style="text-align: center;">
+			<td style="text-align: left;">
 			<br>
-				<span style="font-family: Segoe UI Emoji;">Hi,
-				my name is Aaron. I'm in GEOG 771 at the University of Auckland. This
-				website will hold my labs and project for this class. For example, the
-				map of Hagley Park in Christchurch below.</span>
+				<span style="font-family: Segoe UI Emoji;">		These two webmaps are my final project for GEOG 771. They represent what I have learnt over the course of this semester. They are incomplete, completely amateur, and not executed well whatsoever. However, they are also the result of what happens when I deep-dive into a new method of web mapping.</br>	These web maps were created with Leaflet, Mapbox GL JS and <a href="http://turfjs.org/">Turf.js</a>. Turf was created by Mapbox and is described as "GIS for web maps." It performs geoprocessing functions normally done with ArcMap or QGIS, but on GeoJSON objects in your browser. All data comes from the data portal for the <a href="https://data.cityofchicago.org">City of Chicago</a>.</br>	Map 1 was made with Leaflet and Turf. It shows a selection of neighbourhoods in Chicago and potholes repaired in the last seven days. The objective was to use Turf to perform a point in polygon analysis. There was some difficulties with this. First, the GeoJSON polygons were not able to be loaded properly from the same .geojson file, necessitating separate files. Each colour of polygon shows a selection of neighbourhoods from the same .geojson file. I was unable to find a way to iterate this function throughout multiple polygons. Second, although the <a href="http://turfjs.org/#within">'turf.within()'</a> function did work, it was unable to be added to the polygon. Instead it was printed to the console with 'console.log().' To see this, press f12 in Google Chrome to view the console.</br> Map 2 was made with Mapbox GL JS and is an extension of the skills learnt in lab 3. The points represent abandoned cars in the City of Chicago in January 2016. The points were coloured based on their colour reported in the dataset. The points were styled with <a href="https://www.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/">Data Driven styling</a>. More interactivity was added with the cars containing a popup and the toggle to switch layers on and off. This was added through reading the documentation for Mapbox GL JS. Another point layer of cars representing impound lots was acquired and added to the map. The objective with these two point feature classes was to perform a turf.nearest function to see which impound lot would be closest for the abandoned car to be towed to, similarly to <a href="https://www.mapbox.com/help/analysis-with-turf/">this example.</a></br>Despite not fulfilling the requirements of this project, I feel like I have learnt a lot. Without guidance, I am able to read documentation and try things out. I was able to get a small part of Turf working. And I have a better understanding of coding and web maps than I thought I would ever have. This course has been enjoyable and engaging, and I got a lot out of it. Coding, data mining, and geo visualisation are things I definitely want to keep on learning about. So thank you for making this course so good.</span>
 			<br>
 			<br>
 			</td>
@@ -60,91 +60,414 @@
 	</tbody>
 </table>
 
-<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 100%; width: 75%;">
+<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 850px; width: 85%;">
 	<tbody>
 		<tr>
 			<td style="text-align: center; width: 75%; background-color: white;">
-			<div id="mapid" style="width: 100%; height: 500px;" align="center">
-				</div>
+			<div id="map" style="width: 100%; height: 100%;">
+        </div>
 
-<script>
 
-var mymap = L.map('mapid').setView([-43.5285, 172.6234], 14);
-L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(mymap);
+    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'>
+        </script>
+    <script type="text/javascript" src="potholes.js">
+        </script>
+    <script type="text/javascript" src="potholes.geojson">
+        </script>
+    <script type="text/javascript" src="test.geojson">
+        </script>
+    <script type="text/javascript" src="test2.geojson">
+        </script>
+    <script type="text/javascript" src="test3.geojson">
+        </script>
+    <script type="text/javascript" src="test4.geojson">
+        </script>
+    <script type="text/javascript" src="test5.geojson">
+        </script>
+    <script type="text/javascript" src="test6.geojson">
+        </script>
 
-</script>
 
-<script>
+    <script>
 
-var Hagley = { 
-	"type": "Feature",
-	"properties": {
-		"name": "name"
-		}, "geometry": {
-			"type": "Polygon",
-			"coordinates": [
-			[
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				],
-				[
-				172.6123338354679,
-				-43.54023778283648,
-				0
-				],
-				[
-				172.6180752871326,
-				-43.54022034262606,
-				0
-				],
-				[
-				172.6279659433745,
-				-43.53455773090603,
-				0
-				],
-				[
-				172.6285941224909,
-				-43.52537950852417,
-				0
-				],
-				[
-				172.6253616656776,
-				-43.52059908846449,
-				0
-				],
-				[
-				172.6226839691339,
-				-43.52209659983998,
-				0
-				],
-				[
-				172.6186457310187,
-				-43.52223562045263,
-				0
-				],
-				[
-				172.6124013169785,
-				-43.52424712172118,
-				0
-				]
-			]	
-		]
-	}
-};
 
-L.geoJson([Hagley],	{
-	color: 'black',
-	fillColor: 'red',
-	fillOpacity: 0.3
-}).addTo(mymap).bindPopup("Hagley Park, Christchurch");
+            var map = L.map('map').setView([41.881832, -87.623177], 11);
 
-</script> 
+            var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>, Data from <a href="https://data.cityofchicago.org/">City of Chicago</a>' });
+
+            map.addLayer(layer);
+
+            // Tilelayer is working.
+
+            //////////////////////// polys, adding the refs and polys /////////////////////////////////////
+
+            // var chicago = L.geoJson(chicago).addTo(map);
+
+            var potholes = L.geoJson(potholes).addTo(map);
+
+            var poly = test; //two test neigbourhood from geojson, grand boulevard to printers row.
+
+            var poly2 = test2; // three polys - united centre to garfield park.
+
+            var poly3 = test3; //North Lawndale to Armour Square.
+
+            var poly4 = test4; // avalon to little italy.
+
+            var poly5 = test5; // from kenwood to irving park.
+
+            var poly6 = test6; // dunning to uptown.
+
+            // var chi = L.geoJson(poly).addTo(map);
+
+            
+
+            L.geoJson(poly, {
+            	color: 'red'
+            }).addTo(map);
+
+            L.geoJson(poly2, {
+            	color: 'green'
+            }).addTo(map);
+
+            L.geoJson(poly3, {
+            	color: 'purple'
+            }).addTo(map);
+
+            L.geoJson(poly4, {
+            	color: 'orange'
+            }).addTo(map);
+
+            L.geoJson(poly5, {
+            	color: 'pink'
+            }).addTo(map);
+
+            L.geoJson(poly6, {
+            	color: 'yellow'
+            }).addTo(map);
+
+            // Points are loaded.
+
+            var testpot = potholesa // potholes from geo json
+
+            
+
+            var pts = turf.within(testpot, poly); //number of pots in hood
+            //whatever.features.length
+
+            var pts2 = turf.within(testpot, poly2);
+
+            var pts3 = turf.within(testpot, poly3);
+            var pts4 = turf.within(testpot, poly4);
+            var pts5 = turf.within(testpot, poly5);
+            var pts6 = turf.within(testpot, poly6);
+
+            console.log(pts);
+            console.log(pts2);
+            console.log(pts3);
+            console.log(pts4);
+            console.log(pts5);
+            console.log(pts6);
+
+            
+            
+     
+    </script>
 
 			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table style="background-color: white; text-align: left; margin-left: auto; margin-right: auto; height: 850px; width: 85%;">
+	<tbody>
+		<tr>
+			<td style="text-align: center; width: 100%; background-color: white;">
+			<div id="map2" style="width: 100%; height: 100%;">
+        </div>
+
+        <style>
+
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #3074a4;
+    }
+
+	</style>
+
+	<nav id="menu">
+        </nav>
+
+    <script>
+
+    		// Webmap tiles work
+            mapboxgl.accessToken = 
+            	"pk.eyJ1IjoiYWptYXNhZ25heSIsImEiOiJjaXJ2ODhxNzYwajFyZmdtOGhnZ2YxbTNrIn0.r6qWjMuLW7YLc5bAmz8HHw";
+
+            var map2 = new mapboxgl.Map({
+                container: 'map2',
+                style: "mapbox://styles/ajmasagnay/ciuhykde5001j2inyavngicrg",
+                center: [-87.623177, 41.881832],
+                zoom: 10
+            });
+
+            // Adding the tracts
+            map2.on('load', function() {
+            	map2.addSource('tracts', {
+            		type: 'vector',
+            		url: "mapbox://ajmasagnay.ciuhullds00ra2zqf10bobp5v-3nhtx"
+            	})
+            	map2.addLayer({
+            		'id': 'tracts',
+            		'type': 'fill',
+            		'source': 'tracts',
+            		'source-layer': 'JanTracts',
+            		'layout': {
+            			'visibility': 'visible'
+            		},
+            		'paint': {
+            			'fill-color': '#99CCFF',
+            			'fill-outline-color': '#994200',
+            			'fill-opacity': 0.5
+            		}
+            	});
+            });
+            // Tracts work. Will need to adjust the display.
+            // Adjusting display with 'Property functions' in the fill-color.
+            // Need to adjust and add a legend.
+
+            // This is the start, add points as source then display.
+            // Wasn't loading the points. FIX: The points are circles, not symbols.
+            map2.on('load', function () {
+            	map2.addSource('cars', {
+            		type: 'vector',
+            		url: "mapbox://ajmasagnay.ciuhukwbh001i2ypeqwuttwjv-9k90p"
+            	});
+            	map2.addLayer({
+            		'id': 'cars',
+            		'type': 'circle',
+            		'source': 'cars',
+            		'source-layer': 'JanPoints',
+            		'layout': {
+            			'visibility': 'visible'
+            		},
+            		'paint': {
+            			'circle-color': {
+            				property: 'vehicle_co',
+            				type: 'categorical',
+            				stops: [
+            					['Beige', '#F5F5DC'],
+            					['Black', '#000000'],
+            					['Blue', '#0051D8'],
+            					['Bronze', '#998100'],
+            					['Brown', '#A17E6B'],
+            					['Burgundy', '#330000'],
+            					['Cream', '#F2F2F2'],
+            					['Gold', '#FFD700'],
+            					['Gray', '#808080'],
+            					['Green', '#008000'],
+            					['Maroon', '#800000'],
+            					['Multi-Color', '#FFC0CB'],
+            					['Orange', '#FFAE19'],
+            					['Purple', '#800080'],
+            					['Red', '#FF0000'],
+            					['Silver', '#C0C0C0'],
+            					['Star', '#FFFF00'],
+            					['Stripes', '#FFFF00'],
+            					['Tan', '#D2B48C'],
+            					['Turquoise', '#40E0D0'],
+            					['White', '#FFFFFF'],
+            					['Yellow', '#FFFF00']
+            				]
+            			},
+                        'circle-radius': 4
+            			}
+            	});
+            });
+
+            map2.on('load', function() {
+                map2.addSource('lots', {
+                    'type': 'geojson',
+                    'data': {
+                        "type": "FeatureCollection",
+                        "features": [
+                        {
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [
+                                -87.619147,41.887886,0
+                                ]},
+                                "properties": {
+                                    "name":"Central Auto Pound"}},
+                                {"type":"Feature",
+                                "geometry":{
+                                    "type":"Point",
+                                    "coordinates":[-87.88447,41.994965,0]},
+                                    "properties":{
+                                        "name":"O'Hare International Airport Auto Pound"}},
+                                    {"type":
+                                    "Feature",
+                                    "geometry":{"type":"Point","coordinates":[-87.581785,41.707955,0]},
+                                    "properties":{"name":"Auto Pound #2, Auto Pound #3S, Auto Pound 1S"}},
+                                    {"type":"Feature",
+                                    "geometry":{"type":"Point","coordinates":[-87.701698,41.89925,0]},
+                                    "properties":{"name":"Auto Pound #6, Auto Pound #3N"}},
+                                    {"type":"Feature","geometry":{"type":"Point","coordinates":[-87.764433,41.9185,0]},"properties":{"name":"Auto Pound #4"}}]}
+
+                    
+                });
+
+                map2.addLayer({
+                    'id': 'lots',
+                    'type': 'symbol',
+                    'source': 'lots',
+                    'layout': {
+                        'icon-image': 'car-15',
+                        'icon-size': 1.5 
+                    },
+                    'paint': {
+                        'icon-color': '#ff00ff'
+                    }
+                });
+            });
+
+            // Swapped order of source-layer functions to see if the points will load above the polygons.
+            // Points now load above the polygon.
+            // circle-color can be changed with data-driven styling, refer to mapbox gl js example.
+            // data-driven styling works.
+
+            // Try to add pop-up on hover now.
+
+            var popup = new mapboxgl.Popup({
+            	closeButton: false,
+            	closeonClick: false
+            });
+
+            map2.on('mousemove', function(e) {
+            	var features = map2.queryRenderedFeatures(e.point, { layers: ['cars'] });
+            	// Change the cursor style as a UI indicator.
+            	map2.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+            	if (!features.length) {
+            		popup.remove();
+            		return;
+            	}
+
+            	var feature = features[0];
+
+            	// Populate the popup and set its coordinates
+            	// based on the feature found.
+
+            	popup.setLngLat(feature.geometry.coordinates)
+            		.setHTML("Hi, I am a " + feature.properties.vehicle_co + " " + feature.properties.vehicle_ma)
+            		.addTo(map2);
+            });
+
+            // Popup on points works. Need to figure out how to add more text.
+            // More text added.
+
+            //Trying to add removeable layers.
+            var toggleableLayerIds = [ 'tracts', 'cars'];
+
+            for (var i = 0; i < toggleableLayerIds.length; i++) {
+                var id = toggleableLayerIds[i];
+
+                var link = document.createElement('a');
+                link.href = '#';
+                link.className = 'active';
+                link.textContent = id;
+
+                link.onclick = function(e) {
+                    var clickedLayer = this.textContent;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var visibility = map2.getLayoutProperty(clickedLayer, 'visibility');
+
+                    if (visibility === 'visible') {
+                        map2.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                        this.className = '';
+                    }else{
+                        this.className = 'active';
+                        map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+                    }
+                };
+
+                var layers = document.getElementById('menu');
+                layers.appendChild(link);
+            }
+
+            // Display and remove layers works.
+
+            //Trying Turf for the first time. Starting with a hexbin.
+            // Question about Centering text label in mapbox-gl-js shows you can use turf with this API.
+            // Going to try and make a TIN map.
+
+            var tin = turf.tin(cars)
+            for (var i = 0; i < tin.features.length; i++) {
+                var properties = tin.features[i].properties;
+                properties.fill = '#000000' + properties.a + properties.b + properties.c;
+            };
+
+            map.addLayer({
+                'id': 'tin',
+                'type': 'fill',
+                'source': 'tin',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.8
+                }
+            });
+
+     
+    </script>
+
+
+
+        </td>
 		</tr>
 	</tbody>
 </table>
